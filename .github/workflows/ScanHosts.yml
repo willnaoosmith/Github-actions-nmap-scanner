@@ -1,0 +1,23 @@
+name: Scan list of hosts with Nmap
+on:
+  push:
+    branches:
+      - main
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: clone repository
+        uses: actions/checkout@v2
+
+      - name: scan list of hosts
+        uses: shaybenb/nmap-action@1.1
+        env:
+          COMMAND: ${{ secrets.command }} -iL hostlist.txt -oN Output.txt
+
+      - name: save output
+        uses: actions/upload-artifact@v1
+        with:
+          name: Command-output
+          path: Output.txt
