@@ -1,8 +1,8 @@
 name: Scan list of hosts with Nmap
 on:
   push:
-    branches:
-      - main
+    paths:
+      - 'hostlist.txt'
 jobs:
   scan:
     runs-on: ubuntu-latest
